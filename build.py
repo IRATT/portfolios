@@ -82,7 +82,7 @@ for source,dest in mapping.items():
  else:
   for slug,n in [('mit','mit-marks'),('bacnet','bacnet-pair'),('schneider','schneider-airflow'),('cdcdp','cdcdp-zones')]:
    pattern=r'(<a class="coursecard [^"]+" href="'+slug+r'/">.*?)(<div class="cardlink">)'
-   s=re.sub(pattern,r'\1<img class="course-thumb" src="assets/visuals/'+n+'.svg" alt="Visual preview of this course portfolio" width="760" height="420" loading="lazy">\2',s)
+   s=re.sub(pattern,lambda m:m.group(1)+'<img class="course-thumb" src="assets/visuals/'+n+'.svg" alt="Visual preview of this course portfolio" width="760" height="420" loading="lazy">'+m.group(2),s)
  p=R/dest/'index.html';p.parent.mkdir(exist_ok=True);p.write_text(s)
 (R/'.nojekyll').write_text('')
 (R/'README.md').write_text('''# Ian Alleyne · Portfolios
